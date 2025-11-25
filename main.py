@@ -29,7 +29,15 @@ def create_posts(post: Post):
                                            #ensures there's a very small probability
                                            #of getting the same number twice
     my_posts.append(post_dict)
-
+    
+@app.get("/posts/{id}") #id field represents a path parameter
+                        #path parameters will be returned as strings instead of integers
+                        #even though they're represented as integers
+def get_post(id:int):   #I added :int next to id so python validates and automatically converts incoming data to an int if possible
+    
+    print(id)      
+    post = find_post(id)
+    return {"post_detail": post}
     
 
 
