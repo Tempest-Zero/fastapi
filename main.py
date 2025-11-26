@@ -33,12 +33,17 @@ def create_posts(post: Post):
 @app.get("/posts/{id}") #id field represents a path parameter
                         #path parameters will be returned as strings instead of integers
                         #even though they're represented as integers
-def get_post(id:int):   #I added :int next to id so python validates and automatically converts incoming data to an int if possible
-    
-    print(id)      
+
+def get_post(id:int, response: Response):      
+    print(id)       
     post = find_post(id)
+    if not post:
+     response.status_code = status.HTTP_404_NOT_FOUND
+     return {'message': f"post with id: {id} was not found"}
     return {"post_detail": post}
-    
+     
+
+
 
 
 
